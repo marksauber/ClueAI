@@ -1,0 +1,1 @@
+An Android application to serve as a companion to the board game Clue.
