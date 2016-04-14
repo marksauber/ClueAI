@@ -16,6 +16,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -55,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Record a turn", Snackbar.LENGTH_SHORT)
                         .setAction("Action", null).show();
             }
         });
@@ -94,6 +96,8 @@ public class MainActivity extends AppCompatActivity {
          * fragment.
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
+        private static final String ARG_SECTION_NAME = "section_name";
+        private static final String ARG_NUM_OBJECTS = "num_objects";
 
         public PlaceholderFragment() {
         }
@@ -102,10 +106,12 @@ public class MainActivity extends AppCompatActivity {
          * Returns a new instance of this fragment for the given section
          * number.
          */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
+        public static PlaceholderFragment newInstance(int sectionNumber, String sectionName) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+            args.putString(ARG_SECTION_NAME, sectionName);
+            args.putInt(ARG_NUM_OBJECTS, getNumObjects(sectionNumber));
             fragment.setArguments(args);
             return fragment;
         }
@@ -115,8 +121,28 @@ public class MainActivity extends AppCompatActivity {
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+            textView.setText(getArguments().getString(ARG_SECTION_NAME));
+
+            LinearLayout ll = (LinearLayout) rootView.findViewById(R.id.list);
+            int numButtons = (getArguments().getInt(ARG_NUM_OBJECTS));
+            for(int i = 0; i < numButtons; i++){
+                CheckBox cb = new CheckBox(getActivity());
+                //cb.setText();
+                ll.addView(cb);
+            }
             return rootView;
+        }
+
+        private static int getNumObjects(int sectionNumber){
+            switch (sectionNumber){
+                case 1 :
+                    return 6;
+                case 2 :
+                    return 6;
+                case 3 :
+                    return 9;
+            }
+            return -1;
         }
     }
 
@@ -134,24 +160,26 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            return PlaceholderFragment.newInstance(position + 1, (String) getPageTitle(position));
         }
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return 3;
+            // Show 4 total pages.
+            return 4;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "SECTION 1";
+                    return "Suspects";
                 case 1:
-                    return "SECTION 2";
+                    return "Weapons";
                 case 2:
-                    return "SECTION 3";
+                    return "Rooms";
+                case 3:
+                    return "Assistant";
             }
             return null;
         }
