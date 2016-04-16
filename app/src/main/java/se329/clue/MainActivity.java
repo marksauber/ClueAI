@@ -20,6 +20,8 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import se329.clue.util.CardUtil;
+
 public class MainActivity extends AppCompatActivity {
 
     /**
@@ -127,7 +129,9 @@ public class MainActivity extends AppCompatActivity {
             int numButtons = (getArguments().getInt(ARG_NUM_OBJECTS));
             for(int i = 0; i < numButtons; i++){
                 CheckBox cb = new CheckBox(getActivity());
-                //cb.setText();
+                //Load Json data
+                CardUtil util = new CardUtil(getContext());
+                addCheckboxName(util,getArguments().getString(ARG_SECTION_NAME),cb,i);
                 ll.addView(cb);
             }
             return rootView;
@@ -143,6 +147,15 @@ public class MainActivity extends AppCompatActivity {
                     return 9;
             }
             return -1;
+        }
+        private static void addCheckboxName(CardUtil util,String sectionName,CheckBox cb,int index){
+            if(sectionName.equals("Suspects")){
+                cb.setText(util.getSuspects().get(index));
+            }else if(sectionName.equals("Weapons")){
+                cb.setText(util.getWeapons().get(index));
+            }else if(sectionName.equals(("Rooms"))){
+                cb.setText(util.getRooms().get(index));
+            }
         }
     }
 
