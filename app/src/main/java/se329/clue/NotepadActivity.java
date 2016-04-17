@@ -1,6 +1,8 @@
 package se329.clue;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -56,16 +58,7 @@ public class NotepadActivity extends AppCompatActivity {
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Record a turn", Snackbar.LENGTH_SHORT)
-                        .setAction("Action", null).show();
-                Intent intent = new Intent(NotepadActivity.this, SuggestionActivity.class);
-                NotepadActivity.this.startActivity(intent);
-            }
-        });
+
 
     }
 
@@ -181,8 +174,8 @@ public class NotepadActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            // Show 4 total pages.
-            return 4;
+            // Show 3 total pages.
+            return 3;
         }
 
         @Override
@@ -194,10 +187,21 @@ public class NotepadActivity extends AppCompatActivity {
                     return "Weapons";
                 case 2:
                     return "Rooms";
-                case 3:
-                    return "Assistant";
             }
             return null;
         }
+    }
+
+    private boolean getBooleanFromSP(String key){
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("CLUE", Context.MODE_PRIVATE);
+        boolean value = sharedPreferences.getBoolean(key, false);
+        return value;
+    }
+
+    private void saveBooleanToSP(String key, boolean value){
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("CLUE", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(key, value);
+        editor.commit();
     }
 }
