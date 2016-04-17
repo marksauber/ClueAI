@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class CardUtil {
     private ArrayList<String> suspects;
     private ArrayList<String> weapons;
-    private  ArrayList<String> rooms;
+    private ArrayList<String> rooms;
 
     public CardUtil(Context context){
 
@@ -91,4 +91,5 @@ public class CardUtil {
     public ArrayList<String> getRooms() {
         return rooms;
     }
+
 }
