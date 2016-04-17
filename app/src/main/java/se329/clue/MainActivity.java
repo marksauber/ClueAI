@@ -1,5 +1,6 @@
 package se329.clue;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -61,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Record a turn", Snackbar.LENGTH_SHORT)
                         .setAction("Action", null).show();
+                Intent intent = new Intent(MainActivity.this, SuggestionActivity.class);
+                MainActivity.this.startActivity(intent);
             }
         });
 

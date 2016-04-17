@@ -19,7 +19,7 @@
       </intent-filter>
     </activity>
     <activity
-      android:name=".TurnActivity"
+      android:name=".SuggestionActivity"
       android:label="@string/title_activity_turn"
       android:theme="@style/AppTheme.NoActionBar">
     </activity>

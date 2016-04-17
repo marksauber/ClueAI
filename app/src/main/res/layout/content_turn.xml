@@ -10,32 +10,23 @@
   android:paddingRight="@dimen/activity_horizontal_margin"
   android:paddingTop="@dimen/activity_vertical_margin"
   app:layout_behavior="@string/appbar_scrolling_view_behavior"
-  tools:context="se329.clue.TurnActivity"
+  tools:context=".SuggestionActivity"
   tools:showIn="@layout/activity_turn">
-
-  <TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Turn"
-    android:id="@+id/textView"
-    android:layout_alignParentTop="true"
-    android:layout_alignParentStart="true"/>
 
   <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="Prediction"
     android:id="@+id/textView2"
-    android:layout_below="@+id/textView"
     android:layout_centerHorizontal="true"/>
 
   <Spinner
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:id="@+id/spinner"
+    android:id="@+id/suspects"
     android:layout_below="@+id/textView2"
-    android:layout_alignParentEnd="true"
-    android:layout_marginTop="39dp"/>
+    android:layout_marginTop="39dp"
+    android:layout_alignEnd="@+id/weapons"/>
 
   <EditText
     android:layout_width="wrap_content"
@@ -43,20 +34,20 @@
     android:id="@+id/editText"
     android:layout_below="@+id/textView2"
     android:layout_alignParentStart="true"
-    android:text="Weapon"/>
+    android:text="Suspect"/>
 
   <EditText
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:id="@+id/editText2"
-    android:text="Person"
-    android:layout_below="@+id/spinner"
+    android:text="Weapon"
+    android:layout_below="@+id/suspects"
     android:layout_alignParentStart="true"/>
 
   <Spinner
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:id="@+id/spinner2"
+    android:id="@+id/weapons"
     android:layout_below="@+id/editText2"
     android:layout_alignParentStart="true"/>
 
@@ -65,47 +56,46 @@
     android:layout_height="wrap_content"
     android:id="@+id/editText3"
     android:text="Room"
-    android:layout_below="@+id/spinner2"
+    android:layout_below="@+id/weapons"
     android:layout_alignParentStart="true"/>
 
   <Spinner
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:id="@+id/spinner3"
-    android:layout_alignParentEnd="true"
+    android:id="@+id/rooms"
     android:layout_below="@+id/editText3"
-    android:layout_alignParentLeft="true"/>
-
-  <Spinner
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/spinner5"
-    android:layout_alignParentStart="true"
-    android:layout_alignEnd="@+id/textView2"
-    android:layout_below="@+id/spinner3"/>
+    android:layout_alignParentStart="true"/>
 
   <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Who disproved it?"
+    android:textAppearance="?android:attr/textAppearanceSmall"
+    android:text="Who Disproved it?"
+    android:id="@+id/textView"
+    android:layout_below="@+id/rooms"
+    android:layout_alignParentStart="true"/>
+
+  <Spinner
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/player_disproved"
+    android:layout_below="@+id/textView"
+    android:layout_alignParentStart="true"/>
+
+  <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="?android:attr/textAppearanceSmall"
+    android:text="What kind of Card did you see if its your turn"
     android:id="@+id/textView3"
-    android:layout_above="@+id/spinner5"
-    android:layout_alignParentStart="true"/>
-
-  <TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="What kind of card did you see if its your turn?"
-    android:id="@+id/textView4"
-    android:layout_below="@+id/spinner5"
+    android:layout_below="@+id/player_disproved"
     android:layout_alignParentStart="true"/>
 
   <Spinner
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:id="@+id/spinner4"
-    android:layout_alignParentStart="true"
-    android:layout_below="@+id/textView4"
-    android:layout_alignParentLeft="true"/>
+    android:id="@+id/card_kind"
+    android:layout_below="@+id/textView3"
+    android:layout_alignParentStart="true"/>
 
 </RelativeLayout>
