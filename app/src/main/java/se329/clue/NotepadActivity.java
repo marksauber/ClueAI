@@ -23,7 +23,7 @@ import android.widget.TextView;
 
 import se329.clue.util.CardUtil;
 
-public class MainActivity extends AppCompatActivity {
+public class NotepadActivity extends AppCompatActivity {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -62,8 +62,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Record a turn", Snackbar.LENGTH_SHORT)
                         .setAction("Action", null).show();
-                Intent intent = new Intent(MainActivity.this, SuggestionActivity.class);
-                MainActivity.this.startActivity(intent);
+                Intent intent = new Intent(NotepadActivity.this, SuggestionActivity.class);
+                NotepadActivity.this.startActivity(intent);
             }
         });
 
