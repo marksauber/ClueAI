@@ -15,13 +15,15 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/predictedSuspect"/>
+        android:id="@+id/predictedSuspect" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/predictedWeapon"/>
+        android:id="@+id/predictedWeapon"
+        android:layout_below="@+id/predictedSuspect"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/predictedRoom"/>
+        android:id="@+id/predictedRoom"
+        android:layout_below="@+id/predictedWeapon"/>
 </RelativeLayout>

@@ -21,10 +21,13 @@ import se329.clue.util.GameState;
 
 import android.util.Log;
 
+import java.util.ArrayList;
+
 public class MyCardsActivity extends AppCompatActivity {
 
     MyApp appState;
     GameState gameState;
+    int[] myCards = new int[] {19, 9, 10, 0};
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -64,6 +67,12 @@ public class MyCardsActivity extends AppCompatActivity {
         final Button continueButton = (Button) findViewById(R.id.continueButton);
         continueButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                ArrayList<Integer> myCardsList = new ArrayList<Integer>();
+                for(int i = 0; i < myCards.length; i++){
+                    myCardsList.add(myCards[i]);
+                }
+                gameState.setMyCards(myCardsList);
+                appState.setGameState(gameState);
                 Intent intent = new Intent(MyCardsActivity.this, AssistantActivity.class);
                 MyCardsActivity.this.startActivity(intent);
             }

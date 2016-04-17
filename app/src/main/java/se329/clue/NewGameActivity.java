@@ -16,7 +16,7 @@ import se329.clue.util.GameState;
 
 public class NewGameActivity extends AppCompatActivity {
 
-  int[] order = new int[] {5,1,2,3,4,0};
+  int[] order = new int[] {0,1,2,3,4,5};
   int player = 0;
   MyApp appState;
 

@@ -52,6 +52,7 @@ public class GameState {
         for (int card : myCards) {
             markCard(card, player, GameState.YES);
         }
+        updateGameState();
     }
 
     public void markCard (int cardId, int playerId, int value) {
@@ -59,6 +60,7 @@ public class GameState {
     }
 
     public void updateState(int predictedCards[], int predictor, int disprover, int seenCardType){
+        Log.d("updateState", "start");
         //update predictor's cards
         for(int i = 0; i < 3; i++){
             //only mark maybe if we don't know anything about that card for that player
@@ -73,6 +75,7 @@ public class GameState {
             for(int j = 0; j < 3; j++){
                 markCard(predictedCards[j], currentPlayer, GameState.NO);
             }
+            currentPlayer = order.get(order.indexOf(currentPlayer) + 1);
         }
         //update disprover's cards
         int maybeCount = 0;
@@ -90,6 +93,7 @@ public class GameState {
             markCard(predictedCards[seenCardType], disprover, GameState.YES);
         }
         updateGameState();
+        Log.d("state", getGrid());
     }
 
     //update game state to reflect changes (clean data)
@@ -97,9 +101,15 @@ public class GameState {
 
         for(int i = 0; i < 21; i++){
             boolean inEnvelope = true;
+
             int maybeId = -1;
             int maybeCount = 0;
             boolean canUpdateMaybe = true;
+
+            int yesId = -1;
+            boolean yesFound = false;
+
+
             for(int j = 0; j < 6; j++){
                 if(cards[j][i] != GameState.NO){
                     inEnvelope = false;
@@ -108,6 +118,10 @@ public class GameState {
                 if(cards[j][i] == GameState.MAYBE){
                     maybeId = j;
                     maybeCount++;
+                }
+                if(cards[j][i] == GameState.YES){
+                    yesFound = true;
+                    yesId = j;
                 }
             }
             //if all no, card is in envelope
@@ -119,6 +133,13 @@ public class GameState {
             //if all no, but 1 maybe, change maybe to yes
             if(canUpdateMaybe && maybeCount == 1){
                 markCard(i, maybeId, GameState.YES);
+            }
+
+            //if a card is yes, all other players no
+            if(yesFound) {
+                for (int k = 0; k < 6; k++) {
+                    if (k != yesId) markCard(i, k, GameState.NO);
+                }
             }
         }
 
@@ -182,6 +203,20 @@ public class GameState {
 
     public ArrayList<Integer> getOrder(){
         return order;
+    }
+    public String getGrid(){
+        String grid = "";
+        for(int i = 0; i < 6; i++){
+            for(int j = 0; j < 21; j++){
+                grid += " ";
+                if(cards[i][j] == GameState.NO) grid += "X";
+                else if(cards[i][j] == GameState.MAYBE) grid += "M";
+                else grid += cards[i][j];
+
+            }
+            grid += "\n";
+        }
+        return grid;
     }
 
 }
