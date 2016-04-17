@@ -1,5 +1,9 @@
 package se329.clue.util;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import android.util.Log;
 import java.util.ArrayList;
 
 /**
@@ -22,6 +26,7 @@ public class GameState {
     public GameState(int[] order, int player){
         //initialize fields
         cards = new int[6][21];
+        this.order = new ArrayList<Integer>();
         suspectAnswer = -1;
         weaponAnswer = -1;
         roomAnswer = -1;
@@ -29,6 +34,7 @@ public class GameState {
         this.player = player;
         //set order
         for(int i=0; i< 6; i++){
+            Log.d("order_i", "" + order[i]);
             this.order.add(order[i]);
         }
     }
@@ -83,6 +89,7 @@ public class GameState {
         if(seenCardType != -1){
             markCard(predictedCards[seenCardType], disprover, GameState.YES);
         }
+        updateGameState();
     }
 
     //update game state to reflect changes (clean data)
@@ -171,6 +178,10 @@ public class GameState {
         prediction[1] = weaponId;
         prediction[2] = roomId;
         return  prediction;
+    }
+
+    public ArrayList<Integer> getOrder(){
+        return order;
     }
 
 }

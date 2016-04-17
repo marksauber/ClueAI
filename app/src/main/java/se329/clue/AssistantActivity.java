@@ -25,6 +25,10 @@ public class AssistantActivity extends AppCompatActivity {
                 AssistantActivity.this.startActivity(intent);
             }
         });
+
+
+
+
     }
 
 }

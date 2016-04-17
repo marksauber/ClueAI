@@ -17,8 +17,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import se329.clue.util.CardUtil;
+import se329.clue.util.GameState;
+
+import android.util.Log;
 
 public class MyCardsActivity extends AppCompatActivity {
+
+    MyApp appState;
+    GameState gameState;
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -48,6 +54,11 @@ public class MyCardsActivity extends AppCompatActivity {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+
+
+        appState = (MyApp) getApplication();
+        gameState = appState.getGameState();
+        Log.d("order", gameState.getOrder().toString());
 
         //setup continue button
         final Button continueButton = (Button) findViewById(R.id.continueButton);
