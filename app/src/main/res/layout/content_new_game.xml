@@ -12,13 +12,134 @@
   app:layout_behavior="@string/appbar_scrolling_view_behavior"
   tools:context=".NewGameActivity"
   tools:showIn="@layout/activity_new_game">
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:paddingLeft="50dp"
+                android:paddingRight="50dp"
+                android:id="@+id/linearLayout">
 
-  <Button
-    android:layout_width="wrap_content"
+    <Spinner
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:id="@+id/myPlayerSpinner"/>
+
+    <TextView
+      android:id="@+id/option_1"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="5dp"
+      android:background="@drawable/option"
+      android:gravity="center"
+      android:text="@string/option_1"
+      android:textStyle="bold" />
+
+    <TextView
+      android:id="@+id/option_2"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="5dp"
+      android:background="@drawable/option"
+      android:gravity="center"
+      android:text="@string/option_2"
+      android:textStyle="bold" />
+
+    <TextView
+    android:id="@+id/option_3"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:text="Set Order"
-    android:id="@+id/orderbutton"
-    android:layout_alignParentBottom="true"
-    android:layout_alignParentEnd="true"
-    android:layout_marginBottom="65dp"/>
+    android:layout_margin="5dp"
+    android:background="@drawable/option"
+    android:gravity="center"
+    android:text="@string/option_3"
+    android:textStyle="bold" />
+
+    <TextView
+      android:id="@+id/option_4"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="5dp"
+      android:background="@drawable/option"
+      android:gravity="center"
+      android:text="@string/option_4"
+      android:textStyle="bold" />
+    <TextView
+      android:id="@+id/option_5"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="5dp"
+      android:background="@drawable/option"
+      android:gravity="center"
+      android:text="@string/option_5"
+      android:textStyle="bold" />
+    <TextView
+      android:id="@+id/option_6"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="5dp"
+      android:background="@drawable/option"
+      android:gravity="center"
+      android:text="@string/option_6"
+      android:textStyle="bold" />
+    <TextView
+      android:id="@+id/choice_1"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="5dp"
+      android:background="@drawable/choice"
+      android:gravity="center"
+      android:text="@string/choice_1" />
+
+    <TextView
+      android:id="@+id/choice_2"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="5dp"
+      android:background="@drawable/choice"
+      android:gravity="center"
+      android:text="@string/choice_2" />
+
+    <TextView
+      android:id="@+id/choice_3"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="5dp"
+      android:background="@drawable/choice"
+      android:gravity="center"
+      android:text="@string/choice_3" />
+    <TextView
+      android:id="@+id/choice_4"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="5dp"
+      android:background="@drawable/choice"
+      android:gravity="center"
+      android:text="@string/choice_4" />
+    <TextView
+      android:id="@+id/choice_5"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="5dp"
+      android:background="@drawable/choice"
+      android:gravity="center"
+      android:text="@string/choice_5" /><TextView
+    android:id="@+id/choice_6"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="@drawable/choice"
+    android:gravity="center"
+    android:text="@string/choice_6" />
+    <Button
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Set Order"
+      android:id="@+id/orderbutton"
+      android:layout_below="@+id/linearLayout"
+      android:layout_centerHorizontal="true"
+      android:layout_gravity="center_horizontal"/>
+  </LinearLayout>
+
 </RelativeLayout>

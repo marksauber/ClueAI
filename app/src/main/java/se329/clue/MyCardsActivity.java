@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -28,7 +29,9 @@ public class MyCardsActivity extends AppCompatActivity {
     MyApp appState;
     GameState gameState;
     int[] myCards = new int[] {19, 9, 10, 0};
-
+    private static ArrayList<Boolean> tab1;
+    private static ArrayList<Boolean> tab2;
+    private static ArrayList<Boolean> tab3;
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -77,6 +80,9 @@ public class MyCardsActivity extends AppCompatActivity {
                 MyCardsActivity.this.startActivity(intent);
             }
         });
+        tab1 = new ArrayList<Boolean>();
+        tab2 = new ArrayList<Boolean>();
+        tab3 = new ArrayList<Boolean>();
     }
 
 
@@ -155,11 +161,19 @@ public class MyCardsActivity extends AppCompatActivity {
 
             LinearLayout ll = (LinearLayout) rootView.findViewById(R.id.list);
             int numButtons = (getArguments().getInt(ARG_NUM_OBJECTS));
+            CardUtil util = new CardUtil(getContext());
             for(int i = 0; i < numButtons; i++){
-                CheckBox cb = new CheckBox(getActivity());
-                //Load Json data
-                CardUtil util = new CardUtil(getContext());
-                addCheckboxName(util,getArguments().getString(ARG_SECTION_NAME),cb,i);
+                final CheckBox cb = new CheckBox(getActivity());
+                cb.setId(i);
+                final String sectionName = getArguments().getString(ARG_SECTION_NAME);
+                addCheckboxName(util,sectionName,cb,i);
+                cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        saveCheckBoxData(sectionName,cb,isChecked);
+
+                    }});
+                setCheckboxState(sectionName,cb);
                 ll.addView(cb);
             }
             return rootView;
@@ -179,10 +193,31 @@ public class MyCardsActivity extends AppCompatActivity {
         private static void addCheckboxName(CardUtil util,String sectionName,CheckBox cb,int index){
             if(sectionName.equals("Suspects")){
                 cb.setText(util.getSuspects().get(index));
+                tab1.add(false);
             }else if(sectionName.equals("Weapons")){
                 cb.setText(util.getWeapons().get(index));
+                tab2.add(false);
             }else if(sectionName.equals(("Rooms"))){
                 cb.setText(util.getRooms().get(index));
+                tab3.add(false);
+            }
+        }
+        private static void saveCheckBoxData(String sectionName,CheckBox cb,boolean isChecked){
+            if(sectionName.equals("Suspects")){
+                tab1.set(cb.getId(),isChecked);
+            }else if(sectionName.equals("Weapons")){
+                tab2.set(cb.getId(),isChecked);
+            }else if(sectionName.equals(("Rooms"))){
+                tab3.set(cb.getId(),isChecked);
+            }
+        }
+        private static void setCheckboxState(String sectionName,CheckBox cb){
+            if(sectionName.equals("Suspects")){
+                cb.setChecked(tab1.get(cb.getId()));
+            }else if(sectionName.equals("Weapons")){
+                cb.setChecked(tab2.get(cb.getId()));
+            }else if(sectionName.equals(("Rooms"))){
+                cb.setChecked(tab3.get(cb.getId()));
             }
         }
     }
