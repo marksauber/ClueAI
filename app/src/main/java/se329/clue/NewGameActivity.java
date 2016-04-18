@@ -23,7 +23,12 @@ import android.view.View.OnDragListener;
 import android.view.View.OnTouchListener;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import se329.clue.R;
+import se329.clue.util.CardUtil;
 import se329.clue.util.GameState;
 
 public class NewGameActivity extends AppCompatActivity {
@@ -31,7 +36,9 @@ public class NewGameActivity extends AppCompatActivity {
   int[] order = new int[] {0,1,2,3,4,5};
   int player = 0;
   MyApp appState;
-  private TextView option1, option2, option3,option4, option5, option6, choice1, choice2, choice3,choice4, choice5, choice6;
+  private ArrayList<TextView> options;
+  private ArrayList<TextView> choices;
+  Spinner myPlayerSpinner;
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -44,9 +51,30 @@ public class NewGameActivity extends AppCompatActivity {
 
     //TODO set order and player based upon input
 
+
+    myPlayerSpinner = (Spinner)findViewById(R.id.myPlayerSpinner);
+    String[] players = {"Miss Scarlet", "Mr. Green", "Mrs. White", "Mrs. Peacock", "Prof. Plum", "Col. Mustard"};
+    ArrayAdapter<String> player_adapter = new ArrayAdapter<String>(this,
+            android.R.layout.simple_spinner_item, players);
+    myPlayerSpinner.setAdapter(player_adapter);
+    options = new ArrayList<TextView>();
+    choices = new ArrayList<TextView>();
+    //add option text views
+    addOptions();
+    //add choices text views
+    addChoices();
+
+    //set touch listeners
+    setTouchListeners();
+    //set drag listeners
+    setDragListeners();
     final Button setOrderButton = (Button) findViewById(R.id.orderbutton);
     setOrderButton.setOnClickListener(new View.OnClickListener() {
       public void onClick(View v) {
+        //modify order array
+        getNewOrder();
+        //get player selected
+        player = myPlayerSpinner.getSelectedItemPosition();
         //save gamestate
         saveGameState();
         //goto MyCardsActivity
@@ -54,50 +82,52 @@ public class NewGameActivity extends AppCompatActivity {
         NewGameActivity.this.startActivity(intent);
       }
     });
-    Spinner myPlayerSpinner = (Spinner)findViewById(R.id.myPlayerSpinner);
-    String[] players = {"Miss Scarlet", "Mr. Green", "Mrs. White", "Mrs. Peacock", "Prof. Plum", "Col. Mustard"};
-    ArrayAdapter<String> player_adapter = new ArrayAdapter<String>(this,
-            android.R.layout.simple_spinner_item, players);
-    myPlayerSpinner.setAdapter(player_adapter);
-//views to drag
-    option1 = (TextView)findViewById(R.id.option_1);
-    option2 = (TextView)findViewById(R.id.option_2);
-    option3 = (TextView)findViewById(R.id.option_3);
-    option4 = (TextView)findViewById(R.id.option_4);
-    option5 = (TextView)findViewById(R.id.option_5);
-    option6 = (TextView)findViewById(R.id.option_6);
-
-//views to drop onto
-    choice1 = (TextView)findViewById(R.id.choice_1);
-    choice2 = (TextView)findViewById(R.id.choice_2);
-    choice3 = (TextView)findViewById(R.id.choice_3);
-    choice4 = (TextView)findViewById(R.id.choice_4);
-    choice5 = (TextView)findViewById(R.id.choice_5);
-    choice6 = (TextView)findViewById(R.id.choice_6);
-//set touch listeners
-    option1.setOnTouchListener(new ChoiceTouchListener());
-    option2.setOnTouchListener(new ChoiceTouchListener());
-    option3.setOnTouchListener(new ChoiceTouchListener());
-    option4.setOnTouchListener(new ChoiceTouchListener());
-    option5.setOnTouchListener(new ChoiceTouchListener());
-    option6.setOnTouchListener(new ChoiceTouchListener());
-//set drag listeners
-    choice1.setOnDragListener(new ChoiceDragListener());
-    choice2.setOnDragListener(new ChoiceDragListener());
-    choice3.setOnDragListener(new ChoiceDragListener());
-    choice4.setOnDragListener(new ChoiceDragListener());
-    choice5.setOnDragListener(new ChoiceDragListener());
-    choice6.setOnDragListener(new ChoiceDragListener());
-
 
 
 
   }
-
+  private void addOptions(){
+    options.add((TextView)findViewById(R.id.option_1));
+    options.add((TextView)findViewById(R.id.option_2));
+    options.add((TextView)findViewById(R.id.option_3));
+    options.add((TextView)findViewById(R.id.option_4));
+    options.add((TextView)findViewById(R.id.option_5));
+    options.add((TextView)findViewById(R.id.option_6));
+  }
+  private void addChoices(){
+    choices.add((TextView)findViewById(R.id.choice_1));
+    choices.add((TextView)findViewById(R.id.choice_2));
+    choices.add((TextView)findViewById(R.id.choice_3));
+    choices.add((TextView)findViewById(R.id.choice_4));
+    choices.add((TextView)findViewById(R.id.choice_5));
+    choices.add((TextView)findViewById(R.id.choice_6));
+  }
+  private void setTouchListeners(){
+    for(TextView option:options){
+      option.setOnTouchListener(new ChoiceTouchListener());
+    }
+  }
+  private void setDragListeners(){
+    for(TextView choice:choices){
+      choice.setOnDragListener(new ChoiceDragListener());
+    }
+  }
+  //Gets the order based on position of the panels
+  //Must call CardUtil to get the ids for each one of the players
+  private void getNewOrder(){
+    CardUtil util = new CardUtil(getApplicationContext());
+    HashMap<String,Integer> cardToId = util.getCardToId();
+    int i = 0;
+    for(TextView choice:choices){
+      order[i]=cardToId.get(choice.getText());
+      i++;
+    }
+  }
   protected void saveGameState(){
     GameState gameState = new GameState(order, player);
     appState.setGameState(gameState);
   }
+
   private final class ChoiceTouchListener implements OnTouchListener {
     public boolean onTouch(View view, MotionEvent motionEvent) {
       if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
