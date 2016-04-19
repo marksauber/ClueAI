@@ -17,12 +17,10 @@ public class CardUtil {
     private ArrayList<String> suspects;
     private ArrayList<String> weapons;
     private ArrayList<String> rooms;
-    private HashMap<String,Integer> cardToId;
     public CardUtil(Context context){
 
         try {
             JsonReader reader = new JsonReader(new InputStreamReader(context.getAssets().open("Cards.json"), "UTF-8"));
-            cardToId = new HashMap<String,Integer>();
             reader.beginObject();
             int id;
             //For some reason hasNext() always returns true after going through rooms array
@@ -57,16 +55,15 @@ public class CardUtil {
         reader.beginArray();
         while (reader.hasNext()) {
             reader.beginObject();
-            String id = "" ;
             while (reader.hasNext()) {
                 String prop = reader.nextName();
+                String id ;
                 String name;
                 if (prop.equals("id")) {
                     id = reader.nextString();
                 } else if (prop.equals("name")) {
                     name = reader.nextString();
                     cards.add(name);
-                    cardToId.put(name,Integer.parseInt(id));
                 }
             }
             reader.endObject();
@@ -86,6 +83,5 @@ public class CardUtil {
     public ArrayList<String> getRooms() {
         return rooms;
     }
-    public HashMap<String,Integer> getCardToId(){return cardToId;}
 
 }

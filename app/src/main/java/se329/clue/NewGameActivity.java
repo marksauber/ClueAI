@@ -1,6 +1,7 @@
 package se329.clue;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -23,6 +24,7 @@ import android.view.View.OnDragListener;
 import android.view.View.OnTouchListener;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -71,6 +73,9 @@ public class NewGameActivity extends AppCompatActivity {
     final Button setOrderButton = (Button) findViewById(R.id.orderbutton);
     setOrderButton.setOnClickListener(new View.OnClickListener() {
       public void onClick(View v) {
+        if(orderNotSet()){
+          return;
+        }
         //modify order array
         getNewOrder();
         //get player selected
@@ -85,6 +90,16 @@ public class NewGameActivity extends AppCompatActivity {
 
 
 
+  }
+  private boolean orderNotSet(){
+    for(TextView choice:choices){
+      if(choice.getText().equals("1")||choice.getText().equals("2")||choice.getText().equals("3")||choice.getText().equals("4")||choice.getText().equals("5")||choice.getText().equals("6")) {
+        Toast toast = Toast.makeText(getApplicationContext(), "The order is not set", Toast.LENGTH_SHORT);
+        toast.show();
+        return true;
+      }
+    }
+    return false;
   }
   private void addOptions(){
     options.add((TextView)findViewById(R.id.option_1));
@@ -116,10 +131,10 @@ public class NewGameActivity extends AppCompatActivity {
   //Must call CardUtil to get the ids for each one of the players
   private void getNewOrder(){
     CardUtil util = new CardUtil(getApplicationContext());
-    HashMap<String,Integer> cardToId = util.getCardToId();
+    ArrayList<String> suspects = util.getSuspects();
     int i = 0;
     for(TextView choice:choices){
-      order[i]=cardToId.get(choice.getText());
+      order[i]=suspects.indexOf(choice.getText());
       i++;
     }
   }
