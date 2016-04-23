@@ -26,4 +26,13 @@
         android:layout_height="wrap_content"
         android:id="@+id/predictedRoom"
         android:layout_below="@+id/predictedWeapon"/>
+
+    <Button
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Record a Turn!"
+      android:id="@+id/record_turn"
+      android:layout_alignParentBottom="true"
+      android:layout_alignParentEnd="true"
+      android:layout_marginBottom="81dp"/>
 </RelativeLayout>

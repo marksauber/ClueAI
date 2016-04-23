@@ -1,6 +1,7 @@
 package se329.clue;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -9,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import android.util.Log;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -34,8 +36,8 @@ public class AssistantActivity extends AppCompatActivity {
         Log.d("state", gameState.getGrid());
         Log.d("pred", Arrays.toString(gameState.getPrediction()));
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        Button recordTurn = (Button) findViewById(R.id.record_turn);
+        recordTurn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AssistantActivity.this, SuggestionActivity.class);
