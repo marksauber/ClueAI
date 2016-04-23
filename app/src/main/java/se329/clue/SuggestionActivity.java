@@ -27,6 +27,7 @@ public class SuggestionActivity extends AppCompatActivity {
     Spinner weaponSpinner;
     Spinner roomSpinner;
     Spinner playerDisprovedSpinner;
+    Spinner playerPredictedSpinner;
     Spinner cardKindSpinner;
 
 
@@ -40,6 +41,7 @@ public class SuggestionActivity extends AppCompatActivity {
     suspectSpinner = (Spinner)findViewById(R.id.suspects);
     weaponSpinner = (Spinner)findViewById(R.id.weapons);
     roomSpinner = (Spinner)findViewById(R.id.rooms);
+      playerPredictedSpinner = (Spinner) findViewById(R.id.player_turn);
     playerDisprovedSpinner = (Spinner)findViewById(R.id.player_disproved);
     cardKindSpinner = (Spinner)findViewById(R.id.card_kind);
     CardUtil util = new CardUtil(getApplicationContext());
@@ -56,6 +58,7 @@ public class SuggestionActivity extends AppCompatActivity {
     String[] kindOfCard = {"None","Suspect","Weapon", "Room"};
     ArrayAdapter<String> player_adapter = new ArrayAdapter<String>(this,
             android.R.layout.simple_spinner_item, players);
+      playerPredictedSpinner.setAdapter(player_adapter);
     playerDisprovedSpinner.setAdapter(player_adapter);
     ArrayAdapter<String> card_adapter = new ArrayAdapter<String>(this,
             android.R.layout.simple_spinner_item, kindOfCard);
@@ -86,7 +89,7 @@ public class SuggestionActivity extends AppCompatActivity {
 
         Log.d("prediction", Arrays.toString(prediction));
 
-        int predictor = 0; //TODO add spinner for this
+        int predictor = playerPredictedSpinner.getSelectedItemPosition() - 1;
 
         int disprover = playerDisprovedSpinner.getSelectedItemPosition() - 1;
         int seenCardType = cardKindSpinner.getSelectedItemPosition() - 1;

@@ -12,6 +12,11 @@
     tools:context="se329.clue.MyCardsActivity"
     tools:showIn="@layout/activity_my_cards">
 
+    <TextView
+        android:id="@+id/section_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
