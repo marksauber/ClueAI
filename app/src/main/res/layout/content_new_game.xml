@@ -139,7 +139,16 @@
       android:id="@+id/orderbutton"
       android:layout_below="@+id/linearLayout"
       android:layout_centerHorizontal="true"
-      android:layout_gravity="center_horizontal"/>
+      android:layout_gravity="right"/>
   </LinearLayout>
+
+  <Button
+    style="?android:attr/buttonStyleSmall"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Default Order"
+    android:id="@+id/defaultorderbutton"
+    android:layout_alignBottom="@+id/linearLayout"
+    />
 
 </RelativeLayout>

@@ -70,6 +70,18 @@ public class NewGameActivity extends AppCompatActivity {
     setTouchListeners();
     //set drag listeners
     setDragListeners();
+    final Button defaultOrderButton = (Button) findViewById(R.id.defaultorderbutton);
+    defaultOrderButton.setOnClickListener(new View.OnClickListener() {
+      public void onClick(View v) {
+        //get player selected
+        player = myPlayerSpinner.getSelectedItemPosition();
+        //save gamestate
+        saveGameState();
+        //goto MyCardsActivity
+        Intent intent = new Intent(NewGameActivity.this, MyCardsActivity.class);
+        NewGameActivity.this.startActivity(intent);
+      }
+    });
     final Button setOrderButton = (Button) findViewById(R.id.orderbutton);
     setOrderButton.setOnClickListener(new View.OnClickListener() {
       public void onClick(View v) {
