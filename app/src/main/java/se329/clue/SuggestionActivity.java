@@ -55,10 +55,13 @@ public class SuggestionActivity extends AppCompatActivity {
     weaponSpinner.setAdapter(weapon_adapter);
     roomSpinner.setAdapter(room_adapter);
     String[] players = {"None","Scarlet", "Green", "White", "Peacock", "Plum", "Mustard"};
+    String[] playersNoNone = {"Scarlet", "Green", "White", "Peacock", "Plum", "Mustard"};
     String[] kindOfCard = {"None","Suspect","Weapon", "Room"};
+    ArrayAdapter<String> player_no_none_adapter = new ArrayAdapter<String>(this,
+            android.R.layout.simple_spinner_item, playersNoNone);
     ArrayAdapter<String> player_adapter = new ArrayAdapter<String>(this,
             android.R.layout.simple_spinner_item, players);
-      playerPredictedSpinner.setAdapter(player_adapter);
+    playerPredictedSpinner.setAdapter(player_no_none_adapter);
     playerDisprovedSpinner.setAdapter(player_adapter);
     ArrayAdapter<String> card_adapter = new ArrayAdapter<String>(this,
             android.R.layout.simple_spinner_item, kindOfCard);
