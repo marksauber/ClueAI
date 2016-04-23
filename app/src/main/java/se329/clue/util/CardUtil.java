@@ -2,19 +2,13 @@ package se329.clue.util;
 
 import android.content.Context;
 import android.util.JsonReader;
-import android.util.JsonToken;
-import android.util.Log;
 
-import java.io.Console;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by davisbatten on 4/14/16.
@@ -23,12 +17,10 @@ public class CardUtil {
     private ArrayList<String> suspects;
     private ArrayList<String> weapons;
     private ArrayList<String> rooms;
-
     public CardUtil(Context context){
 
         try {
             JsonReader reader = new JsonReader(new InputStreamReader(context.getAssets().open("Cards.json"), "UTF-8"));
-
             reader.beginObject();
             int id;
             //For some reason hasNext() always returns true after going through rooms array
@@ -64,14 +56,14 @@ public class CardUtil {
         while (reader.hasNext()) {
             reader.beginObject();
             while (reader.hasNext()) {
-                String suspectProp = reader.nextName();
-                String suspectId;
-                String suspectName;
-                if (suspectProp.equals("id")) {
-                    suspectId = reader.nextString();
-                } else if (suspectProp.equals("name")) {
-                    suspectName = reader.nextString();
-                    cards.add(suspectName);
+                String prop = reader.nextName();
+                String id ;
+                String name;
+                if (prop.equals("id")) {
+                    id = reader.nextString();
+                } else if (prop.equals("name")) {
+                    name = reader.nextString();
+                    cards.add(name);
                 }
             }
             reader.endObject();

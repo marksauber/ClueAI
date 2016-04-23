@@ -7,4 +7,18 @@
   <string name="title_activity_new_game">New Game</string>
   <string name="title_activity_my_cards">My Cards</string>
   <string name="title_activity_assistant">Assistant</string>
+
+  <string name="intro">Pleas give the order.</string>
+  <string name="option_1">Miss Scarlet</string>
+  <string name="option_2">Mr. Green</string>
+  <string name="option_3">Mrs. White</string>
+  <string name="option_4">Mrs. Peacock</string>
+  <string name="option_5">Prof. Plum</string>
+  <string name="option_6">Col. Mustard</string>
+  <string name="choice_1">1</string>
+  <string name="choice_2">2</string>
+  <string name="choice_3">3</string>
+  <string name="choice_4">4</string>
+  <string name="choice_5">5</string>
+  <string name="choice_6">6</string>
 </resources>
