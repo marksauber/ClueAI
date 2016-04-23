@@ -20,29 +20,34 @@
   <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+      android:textAppearance="?android:attr/textAppearanceMedium"
     android:text="Prediction"
     android:id="@+id/textView0"
+      android:layout_marginTop="40dp"
     android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/editText"
+        android:layout_below="@+id/textView0"
+        android:layout_alignParentStart="true"
+        android:text="Suspect"/>
 
   <Spinner
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:id="@+id/suspects"
-    android:layout_below="@+id/textView0"
-    android:layout_marginTop="39dp"
+    android:layout_below="@+id/editText"
     android:layout_alignEnd="@+id/weapons"/>
 
-  <TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/editText"
-    android:layout_below="@+id/textView0"
-    android:layout_alignParentStart="true"
-    android:text="Suspect"/>
+
 
   <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+      android:textAppearance="?android:attr/textAppearanceSmall"
     android:id="@+id/editText2"
     android:text="Weapon"
     android:layout_below="@+id/suspects"
@@ -58,6 +63,7 @@
   <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+      android:textAppearance="?android:attr/textAppearanceSmall"
     android:id="@+id/editText3"
     android:text="Room"
     android:layout_below="@+id/weapons"
