@@ -69,28 +69,42 @@ public class GameState {
             }
         }
         //get the first player who can disprove
-        int currentPlayer = order.get(order.indexOf(predictor) + 1);
+        int currentPlayer = order.get((order.indexOf(predictor) + 1) % 6);
         //mark No for every player who couldn't disprove.
-        while(currentPlayer != disprover){
+        while(currentPlayer != disprover && disprover != -1){
             for(int j = 0; j < 3; j++){
                 markCard(predictedCards[j], currentPlayer, GameState.NO);
             }
-            currentPlayer = order.get(order.indexOf(currentPlayer) + 1);
+            currentPlayer = order.get((order.indexOf(currentPlayer) + 1) % 6);
         }
-        //update disprover's cards
-        int maybeCount = 0;
-        for(int k = 0; k < 3; k++){
-            if(cards[disprover][predictedCards[k]] == GameState.NO_INFO){
-                markCard(predictedCards[k], disprover, GameState.MAYBE);
-                maybeCount++;
+        //if not disproved
+        if(disprover == -1){
+            int current = order.get((order.indexOf(predictor) + 1) % 6);
+            for(int i = 0; i < 6; i++){
+                for(int j = 0; j < 3; j++){
+                    if(current != predictor) markCard(predictedCards[j], current, GameState.NO);
+                }
+                current = order.get((order.indexOf(current) + 1) % 6);
+
             }
         }
-        if (maybeCount == 1) {
-            //set only maybe to yes
-        }
-        //update seen card
-        if(seenCardType != -1){
-            markCard(predictedCards[seenCardType], disprover, GameState.YES);
+
+        //update disprover's cards
+        if(disprover != -1) {
+            int maybeCount = 0;
+            for (int k = 0; k < 3; k++) {
+                if (cards[disprover][predictedCards[k]] == GameState.NO_INFO) {
+                    markCard(predictedCards[k], disprover, GameState.MAYBE);
+                    maybeCount++;
+                }
+            }
+            if (maybeCount == 1) {
+                //set only maybe to yes
+            }
+            //update seen card
+            if (seenCardType != -1) {
+                markCard(predictedCards[seenCardType], disprover, GameState.YES);
+            }
         }
         updateGameState();
         Log.d("state", getGrid());
@@ -98,6 +112,8 @@ public class GameState {
 
     //update game state to reflect changes (clean data)
     private void updateGameState(){
+
+        Log.d("updateGrid" , "start");
 
         for(int i = 0; i < 21; i++){
             boolean inEnvelope = true;
@@ -113,7 +129,7 @@ public class GameState {
             for(int j = 0; j < 6; j++){
                 if(cards[j][i] != GameState.NO){
                     inEnvelope = false;
-                    canUpdateMaybe = false;
+                    //canUpdateMaybe = false;
                 }
                 if(cards[j][i] == GameState.MAYBE){
                     maybeId = j;
@@ -142,6 +158,8 @@ public class GameState {
                 }
             }
         }
+
+        Log.d("updateGrid", "end");
 
     }
 
