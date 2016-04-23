@@ -28,7 +28,7 @@ public class MyCardsActivity extends AppCompatActivity {
 
     MyApp appState;
     GameState gameState;
-    int[] myCards = new int[] {19, 9, 10, 0};
+    //int[] myCards = new int[] {19, 9, 10, 0};
     private static ArrayList<Boolean> tab1;
     private static ArrayList<Boolean> tab2;
     private static ArrayList<Boolean> tab3;
@@ -71,9 +71,27 @@ public class MyCardsActivity extends AppCompatActivity {
         continueButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 ArrayList<Integer> myCardsList = new ArrayList<Integer>();
-                for(int i = 0; i < myCards.length; i++){
-                    myCardsList.add(myCards[i]);
+                for(int i=0;i<tab1.size();i++){
+                    if(tab1.get(i)){
+                        myCardsList.add(i);
+                    }
+
                 }
+                for(int i=0;i<tab2.size();i++){
+                    if(tab2.get(i)){
+                      myCardsList.add(i+6);
+                    }
+
+                }
+                for(int i=0;i<tab3.size();i++){
+                    if(tab3.get(i)){
+                        myCardsList.add(i+12);
+                    }
+
+                }
+//                for(int i = 0; i < myCards.length; i++){
+//                    myCardsList.add(myCards[i]);
+//                }
                 gameState.setMyCards(myCardsList);
                 appState.setGameState(gameState);
                 Intent intent = new Intent(MyCardsActivity.this, AssistantActivity.class);
